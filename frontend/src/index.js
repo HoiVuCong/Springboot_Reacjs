@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import {NormalLoginForm} from './components/loginform'
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <NormalLoginForm/>
   </React.StrictMode>,
   document.getElementById('root')
 );
