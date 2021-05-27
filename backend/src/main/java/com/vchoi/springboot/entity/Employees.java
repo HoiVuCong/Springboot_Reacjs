@@ -3,7 +3,10 @@ package com.vchoi.springboot.entity;
 import javax.persistence.*;
 import java.util.Date;
 @Entity
-@Table(name = "employees")
+@Table(name = "employees", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username"),
+        @UniqueConstraint(columnNames = "email")
+})
 public class Employees {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
