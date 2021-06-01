@@ -1,9 +1,12 @@
 package com.vchoi.springboot.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
+@Data
 public class Role {
 
 	@Id
