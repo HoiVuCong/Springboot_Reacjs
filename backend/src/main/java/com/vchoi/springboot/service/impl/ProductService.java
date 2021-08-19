@@ -10,6 +10,8 @@ import com.vchoi.springboot.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ProductService implements IProductService {
 
@@ -31,4 +33,15 @@ public class ProductService implements IProductService {
 
         return productConverter.toProductDTO(productEntity);
     }
+
+    @Override
+    public ProductDTO update(ProductDTO productDTO) {
+        Optional<ProductEntity> oldProduct = productRepository.findById(productDTO.getId());
+        ProductEntity newProduct = productConverter.toProductEntity(productDTO, oldProduct.get());
+        CategoryEntity categoryEntity = categoryRepository.findOneByCode(productDTO.getCategoryCode());
+        newProduct.setCategory(categoryEntity);
+        productRepository.save(newProduct);
+        return productConverter.toProductDTO(newProduct);
+    }
+
 }

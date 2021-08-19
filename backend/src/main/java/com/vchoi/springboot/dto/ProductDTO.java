@@ -1,8 +1,6 @@
 package com.vchoi.springboot.dto;
 
-import lombok.Data;
-
-public class ProductDTO {
+public class ProductDTO extends AbstractDTO<ProductDTO> {
     private String title;
     private String thumbnail;
     private String shortDescription;

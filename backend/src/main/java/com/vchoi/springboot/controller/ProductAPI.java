@@ -2,24 +2,26 @@ package com.vchoi.springboot.controller;
 
 import com.vchoi.springboot.dto.ProductDTO;
 import com.vchoi.springboot.service.IProductService;
-import com.vchoi.springboot.service.impl.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
 public class ProductAPI {
 
     @Autowired
     private IProductService productService;
 
-    @PostMapping(name = "/product")
+    @PostMapping(value = "/product")
     public ProductDTO createProduct(@RequestBody ProductDTO productDTO) {
         return productService.save(productDTO);
     }
 
+    @PutMapping(value = "/product/{id}")
+    public ProductDTO updateProduct(@RequestBody ProductDTO productDTO,
+                                    @PathVariable("id") long id) {
+        productDTO.setId(id);
+
+        return productService.update(productDTO);
+    }
 
 }
