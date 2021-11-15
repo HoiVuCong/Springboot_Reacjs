@@ -33,8 +33,6 @@ public class ProductService implements IProductService {
 
         return productConverter.toProductDTO(productEntity);
     }
-
-    @Override
     public ProductDTO update(ProductDTO productDTO) {
         Optional<ProductEntity> oldProduct = productRepository.findById(productDTO.getId());
         ProductEntity newProduct = productConverter.toProductEntity(productDTO, oldProduct.get());
@@ -43,5 +41,4 @@ public class ProductService implements IProductService {
         productRepository.save(newProduct);
         return productConverter.toProductDTO(newProduct);
     }
-
 }

@@ -18,6 +18,7 @@ public class ProductConverter {
 
     public ProductDTO toProductDTO(ProductEntity productEntity) {
         ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(productEntity.getId());
         productDTO.setTitle(productEntity.getTitle());
         productDTO.setContent(productEntity.getContent());
         productDTO.setShortDescription(productEntity.getShortDescription());
