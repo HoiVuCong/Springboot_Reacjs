@@ -21,7 +21,7 @@ public class Role extends BaseEntity{
         private String code;
         private ERole name;
 
-//        @ManyToMany(mappedBy = "roles")
-//        private List<User> users = new ArrayList<>();
+        @ManyToMany(mappedBy = "roles")
+        private List<User> users = new ArrayList<>();
 
 }

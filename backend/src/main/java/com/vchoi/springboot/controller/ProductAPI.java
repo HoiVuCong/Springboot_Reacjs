@@ -4,6 +4,7 @@ import com.vchoi.springboot.dto.ProductDTO;
 import com.vchoi.springboot.exceptionhandler.TeacherNotFoundException;
 import com.vchoi.springboot.repository.ProductRepository;
 import com.vchoi.springboot.service.IProductService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class ProductAPI {
     @Autowired
     private ProductRepository productRepository;
 
+    @Operation(summary = "Creat a Product")
     @PostMapping(value = "/product")
     public ProductDTO createProduct(@RequestBody ProductDTO productDTO) {
         return productService.save(productDTO);

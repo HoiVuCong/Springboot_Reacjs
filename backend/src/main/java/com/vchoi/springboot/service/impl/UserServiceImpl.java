@@ -1,5 +1,7 @@
 package com.vchoi.springboot.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vchoi.springboot.dto.UserDTO;
 import com.vchoi.springboot.entity.ERole;
 import com.vchoi.springboot.entity.Role;
 import com.vchoi.springboot.entity.User;
@@ -20,11 +22,15 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final ObjectMapper objectMapper;
 
     @Override
-    public User saveUser(User user) {
-        log.info("Save new user {} to data base", user.getUserName());
-        return userRepository.save(user);
+    public UserDTO saveUser(UserDTO userDTO) {
+        log.info("Save new user {} to data base", userDTO.getUsername());
+        User user = objectMapper.convertValue(userDTO, User.class);
+        user = userRepository.save(user);
+        userDTO = objectMapper.convertValue(user, UserDTO.class);
+        return userDTO;
     }
 
     @Override
@@ -34,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUserToRole(String userName, ERole roleName) {
+    public void addRoleToUser(String userName, ERole roleName) {
         log.info("Adding  role {} to user {}", roleName.name(), userName);
         User user = userRepository.findUserByUserName(userName);
         Role role = roleRepository.findByName(roleName);

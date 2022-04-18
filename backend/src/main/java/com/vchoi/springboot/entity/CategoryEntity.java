@@ -16,6 +16,8 @@ public class CategoryEntity extends BaseEntity{
     @OneToMany(mappedBy = "category")
     private List<ProductEntity> products = new ArrayList<>();
 
+
+
     public String getCode() {
         return code;
     }
