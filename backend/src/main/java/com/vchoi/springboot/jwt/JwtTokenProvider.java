@@ -1,4 +1,5 @@
 package com.vchoi.springboot.jwt;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
@@ -8,11 +9,12 @@ import java.util.Date;
 @Component
 @Slf4j
 public class JwtTokenProvider {
-    // Đoạn JWT_SECRET này là bí mật, chỉ có phía server biết
-    private final String JWT_SECRET = "lodaaaaaa";
 
-    //Thời gian có hiệu lực của chuỗi jwt
-    private final long JWT_EXPIRATION = 10000000;
+    @Value("${application.jwt.secret}")
+    private String JWT_SECRET ;
+
+    @Value("${application.jwt.expiration}")
+    private long JWT_EXPIRATION;
 
     // Tạo ra jwt từ thông tin user
     public String generateToken() {

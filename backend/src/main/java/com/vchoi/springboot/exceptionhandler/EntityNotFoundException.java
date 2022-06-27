@@ -1,15 +1,12 @@
 package com.vchoi.springboot.exceptionhandler;
 
-import lombok.Data;
-
-
-public class TeacherNotFoundException extends RuntimeException {
+public class EntityNotFoundException extends RuntimeException {
     private String name;
 
-    public TeacherNotFoundException(String message) {
+    public EntityNotFoundException(String message) {
         super(message);
     }
-    public TeacherNotFoundException(String message, String name) {
+    public EntityNotFoundException(String message, String name) {
         super(message);
         this.name = name;
     }
