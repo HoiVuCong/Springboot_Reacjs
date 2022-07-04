@@ -25,20 +25,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Bean
-    public JwtAuthenticationFilter authenticationJwtTokenFilter() {
-        return new JwtAuthenticationFilter();
-    }
+//
+//    @Bean
+//    public JwtAuthenticationFilter authenticationJwtTokenFilter() {
+//        return new JwtAuthenticationFilter();
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable();
+        http.authorizeRequests()
+                .antMatchers("/login").permitAll()
 //                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
 //                .authorizeRequests().antMatchers("/**").permitAll()
-//                .antMatchers("/login/**").permitAll()
-//                .anyRequest().authenticated();
+
+                .anyRequest().authenticated();
 
 //        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
