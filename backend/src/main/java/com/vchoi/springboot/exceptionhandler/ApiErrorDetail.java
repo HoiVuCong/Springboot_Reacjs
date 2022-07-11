@@ -13,11 +13,11 @@ import lombok.Setter;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiErrorDetail {
-	private String dataName;
+    private String dataName;
 
-	private String fieldName;
+    private String fieldName;
 
-	private String fieldValue;
+    private String fieldValue;
 
-	private String message;
+    private String message;
 }

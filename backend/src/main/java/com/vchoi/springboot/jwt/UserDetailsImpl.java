@@ -1,17 +1,23 @@
 package com.vchoi.springboot.jwt;
 
-import com.vchoi.springboot.entity.ERole;
 import com.vchoi.springboot.entity.User;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+@Setter
+@Getter
 public class UserDetailsImpl implements UserDetails {
-    User user;
+
+
+    private User user;
 
     public UserDetailsImpl(User user) {
+        this.user = user;
     }
 
     @Override

@@ -1,20 +1,19 @@
 package com.vchoi.springboot.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "product")
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-public class ProductEntity extends BaseEntity{
+public class ProductEntity extends BaseEntity {
 
     private String title;
     private String thumbnail;
@@ -25,4 +24,12 @@ public class ProductEntity extends BaseEntity{
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 
+    @Builder
+    public ProductEntity(long id, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, String title, String thumbnail, String shortDescription, String content) {
+        super(id, createdBy, createdDate, modifiedBy, modifiedDate);
+        this.title = title;
+        this.thumbnail = thumbnail;
+        this.shortDescription = shortDescription;
+        this.content = content;
+    }
 }

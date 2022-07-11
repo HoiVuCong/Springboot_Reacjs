@@ -16,6 +16,6 @@ public class UserDTO {
     private String password;
     private int phoneNumber;
     private String gender;
-    private List<Role> Roles;
+    private List<Role> roles;
 
 }

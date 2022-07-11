@@ -8,19 +8,29 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 //        User user = userRepository.findUserByUserName(userName);
-        User user = new User() ;
+        User user = User
+                .builder()
+                .userName("hoivc")
+                .birthday(new Date())
+                .createdBy("vc")
+                .createdDate(new Date())
+                .email("vvvv")
+                .fullName("vchoi")
+                .gender("dd")
+                .build();
         if (user == null) {
             throw new UsernameNotFoundException(userName);
         }
         return new UserDetailsImpl(user);
     }
-
 }

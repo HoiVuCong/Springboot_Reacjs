@@ -10,29 +10,29 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     @Value("${application.jwt.secret}")
-    private String JWT_SECRET;
+    private String jWTSECRET;
 
     @Value("${application.jwt.expiration}")
-    private long JWT_EXPIRATION;
+    private long jWTEXPIRATION;
 
     public String generateToken() {
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + JWT_EXPIRATION);
+        Date expiryDate = new Date(now.getTime() + jWTEXPIRATION);
         return Jwts.builder()
                 .setSubject("hoivc")
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
+                .signWith(SignatureAlgorithm.HS512, jWTSECRET)
                 .compact();
     }
 
     public String getUserNameFromJwtToken(String token) {
-        return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(jWTSECRET).parseClaimsJws(token).getBody().getSubject();
     }
 
     public boolean validateToken(String authToken) {
         try {
-            Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(authToken);
+            Jwts.parser().setSigningKey(jWTSECRET).parseClaimsJws(authToken);
             return true;
         } catch (MalformedJwtException ex) {
             System.out.println("Invalid JWT token");

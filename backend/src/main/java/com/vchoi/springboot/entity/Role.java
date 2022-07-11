@@ -1,22 +1,20 @@
 package com.vchoi.springboot.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "role")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
-public class Role extends BaseEntity{
+public class Role extends BaseEntity {
 
         private String code;
         private ERole name;
@@ -24,4 +22,9 @@ public class Role extends BaseEntity{
         @ManyToMany(mappedBy = "roles")
         private List<User> users = new ArrayList<>();
 
+        public Role(long id, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, String code, ERole name) {
+                super(id, createdBy, createdDate, modifiedBy, modifiedDate);
+                this.code = code;
+                this.name = name;
+        }
 }

@@ -7,5 +7,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ApplicationException extends RuntimeException {
 
-	private final ApiError apiError;
+    private final ApiError apiError;
 }

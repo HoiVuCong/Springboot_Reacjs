@@ -55,7 +55,7 @@ public class UserController {
     }
 }
 @Data
-class RoleToUserForm{
+class RoleToUserForm {
     private String userName;
     private ERole eRole;
 }

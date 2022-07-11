@@ -69,7 +69,9 @@ public class GlobalControllerExceptionHandler {
             errors = new ArrayList<>();
             getFieldErrorForMethodArgumentNotValid((MethodArgumentNotValidException) ex, errors);
 
-            List<ObjectError> globalErrors = ((MethodArgumentNotValidException) ex).getBindingResult().getGlobalErrors();
+            List<ObjectError> globalErrors = ((MethodArgumentNotValidException) ex)
+                    .getBindingResult()
+                    .getGlobalErrors();
             for (ObjectError error : globalErrors) {
                 errors.add(new ApiErrorDetail(error.getObjectName(), null,
                         null, error.getDefaultMessage()));
@@ -80,7 +82,9 @@ public class GlobalControllerExceptionHandler {
             HttpMessageNotReadableException detailException = ((HttpMessageNotReadableException) ex);
             System.out.println(ex.getMessage());
             errors.add(ApiErrorDetail.builder()
-                    .message(Arrays.stream(ex.getMessage().split(":")).findFirst().orElse(((HttpMessageNotReadableException) ex).getMostSpecificCause().getMessage()) +  ", please check the input data")
+                    .message(Arrays.stream(ex.getMessage().split(":"))
+                            .findFirst().orElse(((HttpMessageNotReadableException) ex)
+                                    .getMostSpecificCause().getMessage()) + ", please check the input data")
                     .build());
         } else if (ex instanceof HttpRequestMethodNotSupportedException) {
             errors = new ArrayList<>();
@@ -90,7 +94,8 @@ public class GlobalControllerExceptionHandler {
                     .build());
         } else if (ex instanceof HttpClientErrorException.MethodNotAllowed) {
             errors = new ArrayList<>();
-            HttpClientErrorException.MethodNotAllowed detailException = ((HttpClientErrorException.MethodNotAllowed) ex);
+            HttpClientErrorException
+                    .MethodNotAllowed detailException = ((HttpClientErrorException.MethodNotAllowed) ex);
             errors.add(
                     ApiErrorDetail.builder()
                             .message(detailException.getStatusCode().getReasonPhrase())
@@ -116,11 +121,13 @@ public class GlobalControllerExceptionHandler {
     }
 
     public static boolean isWrapperClassOrStringClass(Class<?> clazz) {
-        return (ClassUtils.isPrimitiveOrWrapper(clazz) ||
+        return (ClassUtils.isPrimitiveOrWrapper(clazz)
+                ||
                 String.class == clazz);
     }
 
-    private void getFieldErrorForMethodArgumentNotValid(MethodArgumentNotValidException ex, List<ApiErrorDetail> errors) {
+    private void getFieldErrorForMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                        List<ApiErrorDetail> errors) {
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
         for (FieldError error : fieldErrors) {
             if (error.getRejectedValue() == null || !isWrapperClassOrStringClass(error.getRejectedValue().getClass())) {

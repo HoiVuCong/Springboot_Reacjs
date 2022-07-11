@@ -11,7 +11,7 @@ public class AbstractDTO<T> {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    List<T> listResult = new ArrayList<>();
+    private List<T> listResult = new ArrayList<>();
 
     public List<T> getListResult() {
         return listResult;

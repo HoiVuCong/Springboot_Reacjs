@@ -14,11 +14,11 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiError {
 
-	private int status;
+    private int status;
 
-	private String statusMessage;
+    private String statusMessage;
 
-	private Date timestamp;
+    private Date timestamp;
 
-	private List<ApiErrorDetail> errors;
+    private List<ApiErrorDetail> errors;
 }
